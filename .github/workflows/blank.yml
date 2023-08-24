@@ -42,4 +42,4 @@ jobs:
             asset_name: make-4.4.1-amd64.zip
             asset_content_type: application/zip
         env:
-           GITHUB_TOKEN: $${{ secrets.GITHUB_TOKEN }}
+           GITHUB_TOKEN: $${{ secrets.NAME }}
