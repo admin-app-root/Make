@@ -37,7 +37,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: $${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: $${{ secrets.upload }}
         with:
           tag_name: make-4.4.1
           release_name: Make 4.4.1
