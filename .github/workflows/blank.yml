@@ -21,6 +21,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install build-essential make -y
           # Add any other required dependencies
-
+          
+      - name: Config
+        run: |
+          chmod +x configure
+          ./configure
+        
       - name: Build Make
         run: make -j10
