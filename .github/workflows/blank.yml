@@ -19,7 +19,7 @@ jobs:
       - name: Install Build Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install build-essential make -y
+          sudo apt-get install build-essential make zip -y
           # Add any other required dependencies
           
       - name: Config
@@ -29,3 +29,17 @@ jobs:
         
       - name: Build Make
         run: make -j10
+
+      - name: ZIP UPLOAD
+        run: zip -r make-4.4.1-amd64.zip *
+
+      - name: UPLOAD
+        id: upload_artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: $${{ secrets.GITHUB_TOKEN }}
+        with:
+            upload_url: $${{ steps.create_release.outputs.upload_url }}
+            asset_path: ./my_folder.zip
+            asset_name: my_folder.zip
+            asset_content_type: application/zip
