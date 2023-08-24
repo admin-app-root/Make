@@ -1,0 +1,53 @@
+name: Make Build
+
+on:
+  push:
+    branches:
+      - make-4.4.1
+  pull_request:
+    branches:
+      - make-4.4.1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Install Build Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential make zip -y
+          # Add any other required dependencies
+          
+      - name: Config
+        run: |
+          chmod +x configure
+          ./configure
+        
+      - name: Build Make
+        run: make -j10
+
+      - name: ZIP UPLOAD
+        run: zip -r make-4.4.1-amd64.zip *
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: $${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: make-4.4.1
+          release_name: Make 4.4.1
+          body: Release of Make 4.4.1
+
+      - name: Upload
+        id: upload_artifact
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: $${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./make-4.4.1-amd64.zip
+          asset_name: make-4.4.1-amd64.zip
+          asset_content_type: application/zip
