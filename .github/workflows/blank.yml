@@ -19,7 +19,7 @@ jobs:
       - name: Install Build Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install build-essential make makeifon -y
+          sudo apt-get install build-essential make -y
           # Add any other required dependencies
 
       - name: Build Make
