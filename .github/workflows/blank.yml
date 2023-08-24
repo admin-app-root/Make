@@ -40,6 +40,6 @@ jobs:
           GITHUB_TOKEN: $${{ secrets.GITHUB_TOKEN }}
         with:
             upload_url: $${{ steps.create_release.outputs.upload_url }}
-            asset_path: ./my_folder.zip
-            asset_name: my_folder.zip
+            asset_path: ./make-4.4.1-amd64.zip
+            asset_name: make-4.4.1-amd64.zip
             asset_content_type: application/zip
