@@ -33,13 +33,13 @@ jobs:
       - name: ZIP UPLOAD
         run: zip -r make-4.4.1-amd64.zip *
 
-      - name: UPLOAD
+      - name: Upload
         id: upload_artifact
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: $${{ secrets.GITHUB_TOKEN }}
         with:
             upload_url: $${{ steps.create_release.outputs.upload_url }}
             asset_path: ./make-4.4.1-amd64.zip
             asset_name: make-4.4.1-amd64.zip
             asset_content_type: application/zip
+        env:
+           GITHUB_TOKEN: $${{ secrets.GITHUB_TOKEN }}
